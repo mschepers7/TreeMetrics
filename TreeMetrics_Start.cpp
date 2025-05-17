@@ -1,24 +1,10 @@
-// Chapter  20 - Programming Challenge 4, Tree Height
-// This program computes the height of a binary tree.
+
  
 #include <iostream>
 #include <algorithm>  // for max
 #include <vector>
 using namespace std;
 
-//STEP ONE: Create a class for binary tree nodes.  Each node will point to 
-//up to two other nodes, which we call the Left Node and Right Node.
-//Call the class BTreeNode.
-//Its private members should be:
-// 1. a double called "value"
-// 2. BTreeNode pointers called "left" and "right"
-// 3. Make BST a friend class.
-//The constructor should be in the public section and should take
-// double x, BTreeNode pointer leftp, and BTreeNode pointer rightp 
-// as inputs and assign the class members accordingly.  Default the 
-// BTreeNode inputs as NULL.
-//See page 1227 for an example, except that is a struct, not a class.
-//Also, you can use either NULL or nullptr
 
 struct  BTreeNode
 {
@@ -57,13 +43,7 @@ private:
 //*************************************************
 int BST::height(BTreeNode *t)
 {
-	//STEP TWO: Evaluate if t is equal to NULL.
-	//If so, return 0.
-	//Otherwise return a call the max() function 
-	//(see https://www.scaler.com/topics/cpp-max/)
-	//with two arguments:
-	//first: call height with t->left as the input
-	//second: call height with t->right as the input, and add 1
+	
     if (t == NULL) return 0; // base case: empty tree has height 0
     else return max(height(t->left), height(t->right)) + 1; // recursive case
 }
@@ -74,15 +54,7 @@ int BST::height(BTreeNode *t)
 //************************************************
 int BST::leafCounter(BTreeNode *t )
 {
-	//STEP THREE: Evaluate t.  If it is NULL return 0.
-	//If t's left and right pointers are both NULL, return 1 
-	//(since t represents just itself with no children)
-	//Otherwise return the sum of two separate calls to leafCounter.
-	//The first call should take t->left as an argument, the other
-	//should take t->right. 
-	//We're using recursion so that we will wind up counting
-	//every single leaf until we hit all parts of the tree
-	//starting at the top node.
+	
     if (t == NULL) return 0; // base case: empty tree has no leaves
     if (t->left == NULL && t->right == NULL) return 1; // leaf node
     else return leafCounter(t->left) + leafCounter(t->right); // recursive case
@@ -97,11 +69,7 @@ int BST::leafCounter(BTreeNode *t )
 //****************************************************
 bool BST::search(double x, BTreeNode *t)
 {
-	//STEP FOUR:
-	//If t is NULL then return false since t clearly doesn't contain x.
-	//If t->value is x, return true, since we found x.
-	//If t->value > x, then call search again with x and t->left as arguments.
-	//Otherwise, call search with x and t->right as arguments.
+	
     if (t == NULL) return false; // base case: empty tree has no x
     if (t->value == x) return true; // found x
     else if (t->value > x) return search(x, t->left); // search left subtree
@@ -140,8 +108,6 @@ void BST::insert(double x)
         }
         else
         {
-			//STEP FIVE: Repeat the code from the "if" block,
-			//but look on p's right instead of left
             if (p->right == NULL)
             {                
                 p->right = new BTreeNode(x);
